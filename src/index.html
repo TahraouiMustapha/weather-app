@@ -1,14 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App | The Odin Project</title>
-</head>
-<body>
-    <form action="" method="get">
-        <input type="text" id="locationInput" name="location" required>
-        <button type="button" id="fetchBtn">fetch</button>
+  </head>
+  <body>
+    <form action="" method="get" novalidate>
+      <input type="text" id="locationInput" name="location" required />
+      <button id="fetchBtn">fetch</button>
     </form>
-</body>
+
+    <div class="cards-container">
+      <div class="big-card">
+        <div class="icon">idon</div>
+        <div class="information">
+            info
+          <div class="temp"></div>
+          <div class="address"></div>
+          <div class="description"></div>
+        </div>
+      </div>
+
+      <div class="small-cards-container">smalls</div>
+    </div>
+  </body>
 </html>
