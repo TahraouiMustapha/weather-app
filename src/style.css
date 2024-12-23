@@ -6,15 +6,16 @@
 
 body {
     --padding-container: 8%;
-    margin: 16px var(--padding-container);
+    margin: 0 var(--padding-container);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 48px;
+    gap: 40px;
     height: 100vh;
 }
 
 input[name ="location"] {
+    margin-top: 16px;
     padding: 8px 12px;
     border-radius: 8px;
     border: none;
@@ -51,4 +52,41 @@ input[name ="location"] {
     background-color: #cffafe;
     border-radius: 60px;
     overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.big-card .information {
+    padding: 0 16px;
+}
+
+.big-card .information > *  {
+    margin-bottom: 12px;
+}
+
+.big-card .information .temp {
+    font-size: 4em;
+}
+
+.big-card .information .address {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.big-card .information .description {
+    font-size: 0.9em;
+}
+
+.icon {
+    height: 70%;
+}
+
+.information {
+    flex: 1;
+}
+
+/* for test */
+.big-card .information > *  {
+    border: 1px solid #000;
 }
