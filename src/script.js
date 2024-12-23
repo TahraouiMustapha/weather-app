@@ -1,23 +1,20 @@
-import { format } from "date-fns";
-import "./style.css";
 // const myKey = "SBB3V7KN7UXJVYQBVJ369S95Z";
 // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/[date2]?key=YOUR_API_KEY 
+import { format } from "date-fns";
+import "./style.css";
+import sendObjToDom from "./domHandler.js";
 
 const locationInput = document.querySelector('#locationInput');
 const fetchBtn = document.querySelector('#fetchBtn');
 
 
-fetchBtn.addEventListener('input', async (e) => {
-    e.preventDefault();
+fetchBtn.addEventListener('click', async (event) => {
+    event.preventDefault();
     const location = locationInput.value;
     try {
         if(location) {
             const myObj = await getWeatherData(location);
-            for(let key in myObj) {
-                console.log(myObj[key]);
-            }
-            console.log(myObj.address, myObj.resolvedAddress);
-            console.log(myObj.conditions);
+            sendObjToDom(myObj);
         } else {
             throw new Error("you should fill right location!");
         }
@@ -26,6 +23,8 @@ fetchBtn.addEventListener('input', async (e) => {
     }
 
 })
+
+sendObjToDom({});
 
 async function getWeatherData(lacation) {
     const today = format(new Date(), 'yyyy-MM-dd');
