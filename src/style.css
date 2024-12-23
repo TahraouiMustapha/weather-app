@@ -127,3 +127,6 @@ input[name ="location"] {
     font-size: 0.8em;
 } 
 
+.loading {
+    font-size: 40px;
+}

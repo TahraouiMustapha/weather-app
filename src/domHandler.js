@@ -90,6 +90,26 @@ function pickIcon(objDotIcon) {
     return rightIcon.iconName; 
 }
 
+const handleLoadingMessage = (function() {
+    const loading = document.querySelector('.loading');
+    const container = document.querySelector('.cards-container');
+
+    const showLoading = () => {
+        loading.style.display = 'block';
+        container.style.display = 'none';
+    }
+
+    const hideLoading = () => {
+        loading.style.display = 'none';
+        container.style.display = 'flex';
+    }
+
+    return {
+        showLoading,
+        hideLoading
+    }
+})();
+
 const cardBuilder = (function (){
     const createIcon = (weatherIcon) => {
         const myDiv = document.createElement('div');
@@ -154,3 +174,4 @@ const cardBuilder = (function (){
 
 
 export default domHandler;
+export { handleLoadingMessage };
