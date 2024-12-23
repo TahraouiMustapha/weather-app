@@ -19,7 +19,7 @@ fetchBtn.addEventListener('click', async (event) => {
             throw new Error("you should fill right location!");
         }
     } catch(err) {
-        console.log(err);
+        alert(err);
     }
 
 })
@@ -36,7 +36,7 @@ async function getWeatherData(lacation) {
         const myObject = await myPromise.json();
         return myObject;
     } catch(err) {
-        console.log('can\'t get this information');
+        alert('can\'t get this information');
         throw err;
     }
 }

@@ -1,4 +1,8 @@
 import rainIcon from "./assets/rain.png";
+import cloudyIcon from "./assets/cloudy.png";
+import snowIcon from "./assets/snow.png";
+import sunIcon from "./assets/sun.png";
+import windIcon from "./assets/wind.png";
 
 function domHandler(obj) {
     const container = document.querySelector('.cards-container');
@@ -18,7 +22,7 @@ function createBigCard(obj) {
     const myDiv = document.createElement('div');
     myDiv.classList.add('big-card');
     
-    myDiv.appendChild(cardBuilder.createIcon(rainIcon));
+    myDiv.appendChild(cardBuilder.createIcon(pickIcon(day0.icon)));
 
     const informationDiv = document.createElement('div');
     informationDiv.classList.add('information');
@@ -36,7 +40,7 @@ function createSmallCard(dayObj) {
     const smallCard = document.createElement('div');
     smallCard.classList.add('small-card');
 
-    smallCard.appendChild(cardBuilder.createIcon(rainIcon));
+    smallCard.appendChild(cardBuilder.createIcon(pickIcon(dayObj.icon)));
 
     const informationDiv = document.createElement('div');
     informationDiv.classList.add('information');
@@ -56,6 +60,34 @@ function resetDom() {
     if(bigCard) bigCard.remove();
     const smallCardsContainer = document.querySelector('.small-cards-container');
     smallCardsContainer.innerHTML = '';
+}
+
+function pickIcon(objDotIcon) {
+    const myIcons = [
+        {   
+            iconName: cloudyIcon,
+            str:"cloudy"
+        }, 
+        {   
+            iconName: rainIcon,
+            str:"rain"
+        },
+        {   
+            iconName: snowIcon,
+            str:"snow"
+        },
+        {   
+            iconName: sunIcon,
+            str:"sun"
+        },
+        {
+            iconName: windIcon,
+            str:"wind"
+        }
+    ];
+    const rightIcon = myIcons.find((icon) => objDotIcon.includes(icon.str)); 
+    if(!rightIcon) return sunIcon;
+    return rightIcon.iconName; 
 }
 
 const cardBuilder = (function (){
