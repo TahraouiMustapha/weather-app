@@ -1,6 +1,6 @@
 // const myKey = "SBB3V7KN7UXJVYQBVJ369S95Z";
 // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/[date2]?key=YOUR_API_KEY 
-import { format } from "date-fns";
+import { format, addDays } from "date-fns";
 import "./style.css";
 import sendObjToDom from "./domHandler.js";
 
@@ -23,13 +23,13 @@ fetchBtn.addEventListener('click', async (event) => {
     }
 
 })
-
-sendObjToDom({});
+ 
 
 async function getWeatherData(lacation) {
     const today = format(new Date(), 'yyyy-MM-dd');
+    const date2 = format(addDays(today, 10), 'yyyy-MM-dd');
     try {    
-        const myPromise = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lacation}/${today}?key=SBB3V7KN7UXJVYQBVJ369S95Z`, {
+        const myPromise = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lacation}/${today}/${date2}?key=SBB3V7KN7UXJVYQBVJ369S95Z`, {
             mode: "cors",
         });
 

@@ -3,18 +3,18 @@ import rainIcon from "./assets/rain.png";
 function domHandler(obj) {
     const container = document.querySelector('.cards-container');
     const smallCardsContainer = document.querySelector('.small-cards-container');
-    container.insertBefore(createBigCard(), smallCardsContainer);
-
-    smallCardsContainer.appendChild(createSmallCard());
-    smallCardsContainer.appendChild(createSmallCard());
-
-    console.log(obj);
-    for(let key in obj) {
-        console.log(obj[key]);
+    resetDom();
+    container.insertBefore(createBigCard(obj), smallCardsContainer);
+    
+    const days = obj.days;
+    for(let i = 1; i < 10; i++) {
+        smallCardsContainer.appendChild(createSmallCard(days[i]));
     }
+
 } 
 
-function createBigCard() {
+function createBigCard(obj) {
+    const day0 = obj.days[0];
     const myDiv = document.createElement('div');
     myDiv.classList.add('big-card');
     
@@ -22,16 +22,17 @@ function createBigCard() {
 
     const informationDiv = document.createElement('div');
     informationDiv.classList.add('information');
-    informationDiv.appendChild(cardBuilder.createTemp('36.4F'));
-    informationDiv.appendChild(cardBuilder.createAddress('3Frankfurt am Main'));
-    informationDiv.appendChild(cardBuilder.createDescription('Similar temperatures continuing'));
+    informationDiv.appendChild(cardBuilder.createTemp(day0.temp));
+    informationDiv.appendChild(cardBuilder.createAddress(obj.resolvedAddress));
+    informationDiv.appendChild(cardBuilder.createDescription(obj.description));
 
     myDiv.appendChild(informationDiv);
 
     return myDiv;
 }
  
-function createSmallCard() {
+function createSmallCard(dayObj) {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const smallCard = document.createElement('div');
     smallCard.classList.add('small-card');
 
@@ -39,14 +40,22 @@ function createSmallCard() {
 
     const informationDiv = document.createElement('div');
     informationDiv.classList.add('information');
-    informationDiv.appendChild(cardBuilder.createTemp('36.4F'));
-    informationDiv.appendChild(cardBuilder.createDayDiv('Monday'));
-    informationDiv.appendChild(cardBuilder.createDateDiv('2024-12-23'));
-    informationDiv.appendChild(cardBuilder.createDescription('Similar temperatures continuing'));
+    informationDiv.appendChild(cardBuilder.createTemp(dayObj.temp));
+    const dayName = days[new Date(dayObj.datetime).getDay()];
+    informationDiv.appendChild(cardBuilder.createDayDiv(dayName));
+    informationDiv.appendChild(cardBuilder.createDateDiv(dayObj.datetime));
+    informationDiv.appendChild(cardBuilder.createDescription(dayObj.conditions));
 
     smallCard.appendChild(informationDiv);
 
     return smallCard;
+}
+
+function resetDom() {
+    const bigCard = document.querySelector('.big-card');
+    if(bigCard) bigCard.remove();
+    const smallCardsContainer = document.querySelector('.small-cards-container');
+    smallCardsContainer.innerHTML = '';
 }
 
 const cardBuilder = (function (){
